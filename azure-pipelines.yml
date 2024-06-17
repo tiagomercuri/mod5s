@@ -4,13 +4,38 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- task: Docker@2
-  inputs:
-    containerRegistry: 'DockerHub'
-    repository: 'tiagomercuri/html21'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
-    tags: |
-      $(Build.BuildId)
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHub'
+        repository: 'tiagomercuri/html21'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+
+- stage: Release
+  dependsOn: Build
+  jobs:
+  - deployment: DeployWeb
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Azure Resource Manager'
+              azureSubscription: 'Minha-Subscription'
+              azureResourceGroup: 'Minha-Resource-Group'
+              kubernetesCluster: 'Meu-Cluster'
+              namespace: 'default'
+              command: 'apply'
+              useConfigurationFile: true
+              configuration: 'manifests/deployment.yaml'
+
 
