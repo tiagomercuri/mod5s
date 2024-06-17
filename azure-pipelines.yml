@@ -7,7 +7,7 @@ pool:
 steps:
 - task: Docker@2
   inputs:
-    containerRegistry: 'DockerHub'  # Nome da conexão de serviço que você criou
+    containerRegistry: 'DockerHub'
     repository: 'tiagomercuri/html21'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
