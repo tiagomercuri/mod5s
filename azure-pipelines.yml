@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - main
 
@@ -12,7 +7,7 @@ pool:
 steps:
 - task: Docker@2
   inputs:
-    containerRegistry: 'DockerHub'
+    containerRegistry: 'DockerHub'  # Nome da conexão de serviço que você criou
     repository: 'tiagomercuri/html21'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
