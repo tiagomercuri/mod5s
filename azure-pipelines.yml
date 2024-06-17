@@ -30,8 +30,8 @@ stages:
           - task: Kubernetes@1
             inputs:
               connectionType: 'Azure Resource Manager'
-              azureSubscription: 'Minha-Subscription'
-              azureResourceGroup: 'Minha-Resource-Group'
+              azureSubscription: 'AzureSubscription'
+              azureResourceGroup: 'meugrupo'
               kubernetesCluster: 'Meu-Cluster'
               namespace: 'default'
               command: 'apply'
