@@ -27,13 +27,12 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: Kubernetes@1
+          - task: AzureCLI@2
             inputs:
-              connectionType: 'Azure Resource Manager'
               azureSubscription: 'AzureSubscription'
-              azureResourceGroup: 'meugrupo'
-              kubernetesCluster: 'Meu-Cluster'
-              namespace: 'default'
-              command: 'apply'
-              useConfigurationFile: true
-              configuration: 'manifests/deployment.yaml'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az group create --name meugrupo --location eastus
+                az container create --resource-group meugrupo --name meucontainer --image tiagomercuri/html21:latest --dns-name-label meucontainerdns --ports 80
+
