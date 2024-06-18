@@ -33,6 +33,13 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
+                # Criar grupo de recursos se não existir
                 az group create --name meugrupo --location eastus
-                az container create --resource-group meugrupo --name meucontainer --image tiagomercuri/html21:latest --dns-name-label meucontainerdns --ports 80
-
+                
+                # Criar instância do contêiner
+                az container create \
+                  --resource-group meugrupo \
+                  --name meucontainer \
+                  --image tiagomercuri/html21:$(Build.BuildId) \
+                  --dns-name-label meucontainerdns \
+                  --ports 80
