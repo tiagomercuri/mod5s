@@ -15,8 +15,8 @@ A aplicação inclui um pipeline de CI/CD configurado no Azure DevOps que realiz
 
 1. Clone o repositório:
     ```BASH
-    git clone https://github.com/tiagomercuri/html21.git
-    cd html21
+    git clone https://github.com/tiagomercuri/mod5s.git
+    cd mod5s
     ```
 
 2. Instale as dependências do Node.js:
@@ -34,7 +34,7 @@ npm test
 ## Configurando o Pipeline de CI/CD no Azure DevOps
 
 1. Crie um novo projeto no Azure DevOps.
-2. Importe o repositório https://github.com/tiagomercuri/html21.git para o repositório Git do seu projeto Azure DevOps.
+2. Importe o repositório https://github.com/tiagomercuri/mod5s.git para o repositório Git do seu projeto Azure DevOps.
 3. Vá para a seção de Pipelines e configure um novo pipeline utilizando o arquivo azure-pipelines.yml deste repositório.
 4. O arquivo fará tudo de forma automática, só precisa aguardar em torno de 5 minutos todo o processo.
 
